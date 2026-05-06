@@ -9,7 +9,7 @@ passlib[bcrypt]==1.7.4
 python-multipart==0.0.20
 opencv-python==4.11.0.86
 mediapipe==0.10.20
-numpy==2.2.2
+numpy==1.26.4
 pandas==2.2.3
 scikit-learn==1.6.1
 torch==2.6.0
