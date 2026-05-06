@@ -3,6 +3,7 @@ export type MakeupRecommendation = {
   category: string;
   shade: string;
   score: number;
+  reason: string;
 };
 
 export type AuthResponse = {
