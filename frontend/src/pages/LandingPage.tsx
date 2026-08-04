@@ -77,87 +77,93 @@ export default function LandingPage() {
       </section>
 
       {/* ── Section 2: About ── */}
-      <section id="about" className="px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cocoa/40">About ASTREA</p>
-            <h2 className="mt-3 font-serif text-3xl tracking-tight text-sand-900 md:text-5xl">Intelligence Meets Beauty</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-cocoa/60">
-              We combine deep learning, computer vision, and large language models to deliver hyper-personalized makeup recommendations that understand you.
-            </p>
-          </div>
+      <section id="about" className="relative overflow-hidden">
+        {/* Beige background + maroon right column */}
+        <div className="absolute inset-0 flex">
+          <div className="w-[80%] bg-[#F5F0EB]" />
+          <div className="w-[20%] bg-[#6B1D2A]" />
+        </div>
 
-          {/* Eye Palette Card + Cursive Quote */}
-          <div className="mt-16 flex flex-col items-center gap-10 md:flex-row md:items-center md:justify-center">
-            {/* Eye Palette Card */}
-            <div className="relative w-full max-w-md">
-              <div className="rounded-[2rem] border-2 border-sand-200 bg-gradient-to-br from-[#2C2C2C] to-[#1A1A1A] p-6 shadow-2xl">
-                {/* Palette lid */}
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="font-serif text-sm font-semibold tracking-wider text-white/70">ASTREA</span>
-                  <span className="text-[0.6rem] uppercase tracking-widest text-white/30">Eyeshadow Palette</span>
-                </div>
-                {/* Grid of "pans" with center video pan */}
-                <div className="grid grid-cols-4 grid-rows-3 gap-2.5">
-                  {/* Row 1 */}
-                  <div className="aspect-square rounded-xl bg-gradient-to-br from-rose-300 to-pink-400 shadow-inner" />
-                  <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner" />
-                  <div className="aspect-square rounded-xl bg-gradient-to-br from-fuchsia-300 to-purple-400 shadow-inner" />
-                  <div className="aspect-square rounded-xl bg-gradient-to-br from-red-300 to-rose-500 shadow-inner" />
-                  {/* Row 2: first + center video + last */}
-                  <div className="aspect-square rounded-xl bg-gradient-to-br from-pink-200 to-rose-300 shadow-inner" />
-                  <div className="col-span-2 row-span-2 aspect-square overflow-hidden rounded-2xl border-2 border-white/20 shadow-lg">
-                    <video autoPlay loop muted playsInline className="h-full w-full object-cover">
-                      <source src="https://v1.pinimg.com/videos/iht/expMp4/68/81/5e/68815e08d2c14dfbf89a8f7d18258aaf_720w.mp4" type="video/mp4" />
-                    </video>
+        <div className="relative px-6 py-24 md:py-32">
+          <div className="mx-auto max-w-6xl">
+            {/* Title */}
+            <div className="text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cocoa/40">About ASTREA</p>
+              <h2 className="mt-3 font-serif text-3xl tracking-tight text-sand-900 md:text-5xl">Intelligence Meets Beauty</h2>
+              <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-cocoa/60">
+                We combine deep learning, computer vision, and large language models to deliver hyper-personalized makeup recommendations that understand you.
+              </p>
+            </div>
+
+            {/* Eye Palette Card + Cursive Quote */}
+            <div className="mt-16 flex flex-col items-center gap-10 md:flex-row md:items-center md:justify-center">
+              {/* Eye Palette Card */}
+              <div className="relative w-full max-w-md">
+                <div className="rounded-[2rem] border-2 border-[#8B5C5F]/30 bg-gradient-to-br from-[#2C2C2C] to-[#1A1A1A] p-6 shadow-2xl">
+                  {/* Palette lid */}
+                  <div className="mb-4 flex items-center justify-between">
+                    <span className="font-serif text-sm font-semibold tracking-wider text-white/70">ASTREA</span>
+                    <span className="text-[0.6rem] uppercase tracking-widest text-white/30">Eyeshadow Palette</span>
                   </div>
-                  <div className="aspect-square rounded-xl bg-gradient-to-br from-red-400 to-pink-500 shadow-inner" />
-                  {/* Row 3: first + last (center covered by row 2 span) */}
-                  <div className="aspect-square rounded-xl bg-gradient-to-br from-orange-300 to-amber-400 shadow-inner" />
-                  <div className="aspect-square rounded-xl bg-gradient-to-br from-rose-400 to-red-400 shadow-inner" />
-                  <div className="aspect-square rounded-xl bg-gradient-to-br from-pink-400 to-fuchsia-400 shadow-inner" />
-                  <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-300 to-orange-400 shadow-inner" />
+                  {/* Grid of pans with center video */}
+                  <div className="grid grid-cols-4 grid-rows-3 gap-2.5">
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-rose-300 to-pink-400 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-fuchsia-300 to-purple-400 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-red-300 to-rose-500 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-pink-200 to-rose-300 shadow-inner" />
+                    <div className="col-span-2 row-span-2 aspect-square overflow-hidden rounded-2xl border-2 border-white/20 shadow-lg">
+                      <video autoPlay loop muted playsInline className="h-full w-full object-cover">
+                        <source src="https://v1.pinimg.com/videos/iht/expMp4/68/81/5e/68815e08d2c14dfbf89a8f7d18258aaf_720w.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-red-400 to-pink-500 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-orange-300 to-amber-400 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-rose-400 to-red-400 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-pink-400 to-fuchsia-400 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-300 to-orange-400 shadow-inner" />
+                  </div>
+                  {/* Palette base */}
+                  <div className="mt-4 flex items-center justify-center gap-1.5">
+                    <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
+                  </div>
                 </div>
-                {/* Palette base */}
-                <div className="mt-4 flex items-center justify-center gap-1.5">
-                  <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                  <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
-                  <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                </div>
+              </div>
+
+              {/* Cursive English Text */}
+              <div className="text-center md:text-left md:max-w-sm">
+                <p className="font-serif text-4xl leading-snug italic tracking-wide text-sand-900 md:text-5xl">
+                  This is your time to shine, diva
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-cocoa/55">
+                  Let AI find the shades that make you glow. Your beauty, amplified by intelligence.
+                </p>
               </div>
             </div>
 
-            {/* Cursive Italian Text */}
-            <div className="text-center md:text-left md:max-w-sm">
-              <p className="font-serif text-4xl leading-snug italic tracking-wide text-sand-900 md:text-5xl">
-                Questo è il tuo momento di brillare, diva
-              </p>
-              <p className="mt-4 text-sm leading-relaxed text-cocoa/55">
-                "This is your time to shine, diva." Let AI find the shades that make you glow.
-              </p>
+            {/* Feature Cards */}
+            <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {[
+                { icon: '🔍', title: 'AI Face Detection', desc: 'CNN-powered analysis using PyTorch and OpenCV for skin tone, undertone, and face shape detection.', tag: 'Computer Vision' },
+                { icon: '🤖', title: 'LLM Beauty Assistant', desc: 'RAG-powered chatbot that answers beauty questions using your personal profile.', tag: 'Ollama' },
+                { icon: '🎯', title: 'Recommendation Engine', desc: 'Cosine similarity matching against product catalog with feedback-driven re-ranking.', tag: 'Personalized' },
+                { icon: '📈', title: 'Feedback Learning', desc: 'System improves over time using exponential moving average preference weighting.', tag: 'Adaptive' },
+              ].map((f) => (
+                <div key={f.title} className="group rounded-2xl border border-white/50 bg-white/70 p-6 backdrop-blur-sm transition hover:border-pink-200 hover:bg-white hover:shadow-lg">
+                  <span className="text-3xl">{f.icon}</span>
+                  <span className="ml-2 rounded-full bg-pink-50 px-2.5 py-0.5 text-[0.6rem] font-semibold text-pink-600">{f.tag}</span>
+                  <h3 className="mt-3 font-serif text-lg font-semibold text-sand-900">{f.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-cocoa/60">{f.desc}</p>
+                </div>
+              ))}
             </div>
-          </div>
 
-          <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              { icon: '🔍', title: 'AI Face Detection', desc: 'CNN-powered analysis using PyTorch and OpenCV for skin tone, undertone, and face shape detection.', tag: 'Computer Vision' },
-              { icon: '🤖', title: 'LLM Beauty Assistant', desc: 'RAG-powered chatbot that answers beauty questions using your personal profile.', tag: 'Ollama' },
-              { icon: '🎯', title: 'Recommendation Engine', desc: 'Cosine similarity matching against product catalog with feedback-driven re-ranking.', tag: 'Personalized' },
-              { icon: '📈', title: 'Feedback Learning', desc: 'System improves over time using exponential moving average preference weighting.', tag: 'Adaptive' },
-            ].map((f) => (
-              <div key={f.title} className="group rounded-2xl border border-sand-100 bg-white p-6 transition hover:border-pink-200 hover:shadow-lg">
-                <span className="text-3xl">{f.icon}</span>
-                <span className="ml-2 rounded-full bg-pink-50 px-2.5 py-0.5 text-[0.6rem] font-semibold text-pink-600">{f.tag}</span>
-                <h3 className="mt-3 font-serif text-lg font-semibold text-sand-900">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-cocoa/60">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Architecture preview */}
-          <div className="mt-16 rounded-3xl border border-sand-100 bg-white p-8 md:p-12">
-            <h3 className="text-center text-xs font-semibold uppercase tracking-widest text-cocoa/40">System Architecture</h3>
-            <pre className="mx-auto mt-6 max-w-lg overflow-x-auto text-center text-xs leading-relaxed text-cocoa/60 font-mono">
+            {/* Architecture preview */}
+            <div className="mt-16 rounded-3xl border border-white/50 bg-white/70 p-8 backdrop-blur-sm md:p-12">
+              <h3 className="text-center text-xs font-semibold uppercase tracking-widest text-cocoa/40">System Architecture</h3>
+              <pre className="mx-auto mt-6 max-w-lg overflow-x-auto text-center text-xs leading-relaxed text-cocoa/60 font-mono">
 {`    Image Upload
          │
          ▼
@@ -176,7 +182,8 @@ export default function LandingPage() {
 │ Ollama│ │  DB   │
 │  LLM  │ │ Postgr│
 └───────┘ └───────┘`}
-            </pre>
+              </pre>
+            </div>
           </div>
         </div>
       </section>
