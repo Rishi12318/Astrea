@@ -1,0 +1,143 @@
+[
+  {
+    "name": "Luminous Skin Foundation",
+    "brand": "Glow Atelier",
+    "category": "foundation",
+    "description": "Hydrating medium-coverage foundation for a natural dewy finish",
+    "price": 38.00,
+    "image_url": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=400&q=80",
+    "shades": [
+      {
+        "shade_name": "Cool Alabaster",
+        "skin_tone": "Fair",
+        "undertone": "Cool",
+        "hex_color": "#E8C5C8",
+        "lab_l": 81.0,
+        "lab_a": 13.0,
+        "lab_b": 10.0
+      },
+      {
+        "shade_name": "Warm Beige",
+        "skin_tone": "Medium",
+        "undertone": "Warm",
+        "hex_color": "#D2A679",
+        "lab_l": 69.0,
+        "lab_a": 16.0,
+        "lab_b": 25.0
+      },
+      {
+        "shade_name": "Neutral Honey",
+        "skin_tone": "Tan",
+        "undertone": "Neutral",
+        "hex_color": "#B58A55",
+        "lab_l": 59.0,
+        "lab_a": 15.0,
+        "lab_b": 28.0
+      }
+    ]
+  },
+  {
+    "name": "Velvet Matte Lip",
+    "brand": "Velvet Muse",
+    "category": "lipstick",
+    "description": "Long wear lip color with satin matte finish",
+    "price": 26.0,
+    "image_url": "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=400&q=80",
+    "shades": [
+      {
+        "shade_name": "Rose Clay",
+        "skin_tone": "Light",
+        "undertone": "Neutral",
+        "hex_color": "#C07080",
+        "lab_l": 52.0,
+        "lab_a": 31.0,
+        "lab_b": 6.0
+      },
+      {
+        "shade_name": "Crimson Silk",
+        "skin_tone": "Tan",
+        "undertone": "Cool",
+        "hex_color": "#A03040",
+        "lab_l": 35.0,
+        "lab_a": 48.0,
+        "lab_b": 20.0
+      }
+    ]
+  },
+  {
+    "name": "Soft Flush Blush",
+    "brand": "Peach Story",
+    "category": "blush",
+    "description": "Natural healthy glow powder blush",
+    "price": 22.0,
+    "image_url": "https://images.unsplash.com/photo-1631730359575-38e4755d772b?auto=format&fit=crop&w=400&q=80",
+    "shades": [
+      {
+        "shade_name": "Peach Coral",
+        "skin_tone": "Medium",
+        "undertone": "Warm",
+        "hex_color": "#E09080",
+        "lab_l": 64.0,
+        "lab_a": 27.0,
+        "lab_b": 24.0
+      }
+    ]
+  },
+  {
+    "name": "Glam Smoky Palette",
+    "brand": "Noir Silk",
+    "category": "eyeshadow",
+    "description": "High pigment eye palette with bronze and cocoa shades",
+    "price": 45.0,
+    "image_url": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=400&q=80",
+    "shades": [
+      {
+        "shade_name": "Cocoa Bronze",
+        "skin_tone": "Deep",
+        "undertone": "Cool",
+        "hex_color": "#5C3C30",
+        "lab_l": 28.0,
+        "lab_a": 12.0,
+        "lab_b": 15.0
+      }
+    ]
+  },
+  {
+    "name": "K-Glass Skin Primer",
+    "brand": "Lumi Seoul",
+    "category": "base",
+    "description": "Radiant primer for glass skin looks",
+    "price": 32.0,
+    "image_url": "https://images.unsplash.com/photo-1608248597481-496100c80836?auto=format&fit=crop&w=400&q=80",
+    "shades": [
+      {
+        "shade_name": "Soft Pink",
+        "skin_tone": "Fair",
+        "undertone": "Neutral",
+        "hex_color": "#FADADD",
+        "lab_l": 89.0,
+        "lab_a": 12.0,
+        "lab_b": 4.0
+      }
+    ]
+  },
+  {
+    "name": "Bridal Dew Highlighter",
+    "brand": "Radiance House",
+    "category": "highlight",
+    "description": "Soft-focus highlighter for special events",
+    "price": 34.0,
+    "image_url": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400&q=80",
+    "shades": [
+      {
+        "shade_name": "Champagne Pearl",
+        "skin_tone": "Light",
+        "undertone": "Warm",
+        "hex_color": "#E6D7C3",
+        "lab_l": 86.0,
+        "lab_a": 2.0,
+        "lab_b": 14.0
+      }
+    ]
+  }
+]

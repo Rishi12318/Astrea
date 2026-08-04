@@ -7,7 +7,8 @@ from alembic import context
 
 from backend.config import get_settings
 from backend.database.base import Base
-from backend.models import feedback, recommendation, user  # noqa: F401
+from backend.models import feedback, recommendation, user  # noqa: F401 – registers all models with metadata
+
 
 config = context.config
 settings = get_settings()

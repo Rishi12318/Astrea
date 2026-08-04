@@ -3,7 +3,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
-from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
 
 

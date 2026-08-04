@@ -11,6 +11,17 @@ assistant_service = BeautyAssistantService()
 
 
 @router.post("/chatbot", response_model=ChatbotResponse)
-def chatbot(payload: ChatbotRequest, token: str = Depends(get_current_user_token), db: Session = Depends(get_db)) -> ChatbotResponse:
-    response = assistant_service.chat(payload.message, user_profile=payload.user_profile)
-    return ChatbotResponse(**response.__dict__)
+def chatbot(
+    payload: ChatbotRequest,
+    token: str = Depends(get_current_user_token),
+    db: Session = Depends(get_db),
+) -> ChatbotResponse:
+    result = assistant_service.chat(
+        message=payload.message,
+        db=db,
+        user_id=payload.user_id,
+        history=payload.history or [],
+        user_profile=payload.user_profile,
+    )
+    return ChatbotResponse(answer=result.answer, confidence=result.confidence, citations=result.citations)
+

@@ -130,21 +130,69 @@ class MakeupPredictor:
         return self.skin_tone_labels[pred_idx], round(confidence, 3)
 
     def _heuristic_predict(self, image: np.ndarray) -> FacePrediction:
-        """Fallback heuristic prediction when CNN is unavailable."""
-        mean_intensity = float(image.mean() / 255.0)
-        tone_index = min(len(self.skin_tone_labels) - 1, int(mean_intensity * len(self.skin_tone_labels)))
-        undertone_index = 0 if mean_intensity > 0.68 else 1 if mean_intensity < 0.42 else 2
-        face_shape = ["Oval", "Round", "Square", "Heart", "Diamond"][tone_index % 5]
-        eye_shape = ["Almond", "Round", "Hooded", "Monolid"][tone_index % 4]
-        lip_shape = ["Full", "Balanced", "Defined", "Subtle"][undertone_index % 4]
+        """Rule-based prediction using LAB colour analysis when CNN is unavailable.
+
+        Skin-tone classification uses the L* channel (lightness) from CIE LAB.
+        Undertone uses the a* (red-green) and b* (blue-yellow) axes:
+          - High b*, moderate a* → Warm
+          - High a*, low b*      → Cool
+          - Both moderate       → Neutral
+        """
+        from backend.ml.preprocessing.face_feature_extractor import FaceFeatureExtractor
+        features = FaceFeatureExtractor().extract(image)
+        lab_l, lab_a, lab_b = features.mean_lab
+
+        # Map L* (0-100 scale; OpenCV stores as 0-255 for LAB) to skin tone
+        # OpenCV LAB: L in [0,255] where 255=100
+        l_norm = lab_l / 255.0 * 100.0  # normalise to 0-100
+
+        if l_norm >= 78:
+            tone = "Fair"
+        elif l_norm >= 67:
+            tone = "Light"
+        elif l_norm >= 55:
+            tone = "Medium"
+        elif l_norm >= 42:
+            tone = "Tan"
+        else:
+            tone = "Deep"
+
+        # OpenCV LAB a* and b* are stored as unsigned 0-255 (128=0 centre)
+        a_centred = lab_a - 128  # roughly -128..+127
+        b_centred = lab_b - 128
+
+        if b_centred > 5 and a_centred < 15:
+            undertone = "Warm"
+        elif a_centred > 8 and b_centred < 5:
+            undertone = "Cool"
+        else:
+            undertone = "Neutral"
+
+        # Face shape from aspect ratio
+        ratio = features.face_shape_ratio
+        if ratio < 0.75:
+            face_shape = "Oval"
+        elif ratio < 0.90:
+            face_shape = "Heart"
+        elif ratio < 1.05:
+            face_shape = "Round"
+        else:
+            face_shape = "Square"
+
+        tone_idx = self.skin_tone_labels.index(tone) if tone in self.skin_tone_labels else 2
+        eye_shape = ["Almond", "Round", "Hooded", "Monolid"][tone_idx % 4]
+        lip_shape = ["Full", "Balanced", "Defined", "Subtle"][(tone_idx + 1) % 4]
+        confidence = round(0.72 + (l_norm / 100.0) * 0.15, 3)
+
         return FacePrediction(
-            skin_tone=self.skin_tone_labels[tone_index],
-            undertone=self.undertone_labels[undertone_index],
+            skin_tone=tone,
+            undertone=undertone,
             face_shape=face_shape,
             eye_shape=eye_shape,
             lip_shape=lip_shape,
-            confidence=round(0.78 + mean_intensity * 0.18, 3),
+            confidence=confidence,
         )
+
 
     def _derive_secondary_features(self, image: np.ndarray, skin_tone: str) -> tuple[str, str, str, str]:
         """Derive undertone, face shape, eye and lip features from skin tone and image."""
@@ -184,12 +232,19 @@ class MakeupPredictor:
             pil_image = transforms.ToPILImage()(face_roi.astype(np.uint8))
             tensor = self.transform(pil_image).unsqueeze(0).to(self.device)
             
-            # Extract features from backbone (before classification head)
+            # Extract features from backbone after layer4, before avgpool
             with torch.no_grad():
-                features = self.skin_tone_model.backbone.avgpool(
-                    self.skin_tone_model.backbone(tensor[:, :, :, :].requires_grad_(False))
-                )
-                embedding = features.flatten().cpu().numpy().astype(np.float32)
+                x = tensor
+                x = self.skin_tone_model.backbone.conv1(x)
+                x = self.skin_tone_model.backbone.bn1(x)
+                x = self.skin_tone_model.backbone.relu(x)
+                x = self.skin_tone_model.backbone.maxpool(x)
+                x = self.skin_tone_model.backbone.layer1(x)
+                x = self.skin_tone_model.backbone.layer2(x)
+                x = self.skin_tone_model.backbone.layer3(x)
+                x = self.skin_tone_model.backbone.layer4(x)
+                x = self.skin_tone_model.backbone.avgpool(x)
+                embedding = x.flatten().cpu().numpy().astype(np.float32)
             
             # Normalize embedding
             return embedding / (np.linalg.norm(embedding) + 1e-6)

@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:5173"
     ollama_base_url: str = "http://localhost:11434"
     ollama_model: str = "llama3.1"
+    anthropic_api_key: str | None = None
+
 
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=False)
 

@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi.exceptions import RequestValidationError
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,17 +8,35 @@ from fastapi.responses import JSONResponse
 
 from backend.api.routes import api_router
 from backend.config import get_settings
-from backend.database.session import init_db
+from backend.database.session import init_db, SessionLocal
 from backend.utils.logger import configure_logging
 
 settings = get_settings()
 configure_logging()
-init_db()
+
+
+@asynccontextmanager
+async def lifespan(application: FastAPI):
+    """Startup: init DB tables and seed catalog."""
+    init_db()
+    db = SessionLocal()
+    try:
+        from backend.services.catalog_service import CatalogService
+        CatalogService().seed_catalog(db)
+    finally:
+        db.close()
+    yield
+
 
 app = FastAPI(
     title="AI-Powered Personalized Makeup Recommendation System",
-    version="1.0.0",
-    description="Production-style beauty-tech API for face analysis and makeup recommendations.",
+    version="2.0.0",
+    description=(
+        "Production-ready beauty-tech API: face analysis, skin tone detection, "
+        "DB-backed product catalog, cosine-similarity recommendations, and "
+        "RAG-grounded beauty chat (Anthropic Claude / Ollama)."
+    ),
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -51,4 +71,6 @@ def root() -> dict[str, str]:
         "service": settings.app_name,
         "status": "running",
         "docs": "/docs",
+        "version": "2.0.0",
     }
+
