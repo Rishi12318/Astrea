@@ -1,132 +1,198 @@
 import { Link } from 'react-router-dom';
 
-const features = [
-  { icon: '🔍', title: 'AI Face Detection', desc: 'Computer Vision', detail: 'CNN-based face analysis using PyTorch and OpenCV for precise skin tone, undertone, and face shape detection.' },
-  { icon: '🤖', title: 'LLM Beauty Assistant', desc: 'Ollama', detail: 'RAG-powered chatbot that answers beauty questions using your personal profile and product knowledge.' },
-  { icon: '🎯', title: 'Recommendation Engine', desc: 'Personalized Products', detail: 'Cosine similarity matching against product catalog with feedback-driven re-ranking.' },
-  { icon: '📈', title: 'Feedback Learning', desc: 'Improves Over Time', detail: 'Exponential moving average preference weighting based on your ratings and history.' },
-];
-
-const techStack = [
-  { category: 'Frontend', items: ['React', 'TypeScript', 'Tailwind CSS'] },
-  { category: 'Backend', items: ['FastAPI', 'JWT Auth', 'REST APIs'] },
-  { category: 'AI/ML', items: ['PyTorch', 'Ollama', 'RAG', 'OpenCV'] },
-  { category: 'Database', items: ['PostgreSQL', 'SQLAlchemy'] },
-  { category: 'Deployment', items: ['Docker', 'Render', 'Vercel'] },
-];
-
-const pipeline = [
-  { step: 'Image Upload', icon: '📷' },
-  { step: 'PyTorch Face Analysis', icon: '🧠' },
-  { step: 'Feature Extraction', icon: '⚙️' },
-  { step: 'Recommendation Engine', icon: '🎯' },
-  { step: 'Ollama LLM', icon: '🤖' },
-  { step: 'Personalized Suggestions', icon: '✨' },
+const reviews = [
+  { name: 'Priya S.', role: 'Makeup Artist', text: 'ASTREA accurately detected my warm undertone and recommended shades I never would have tried. The AI reasoning is spot-on.', avatar: 'P' },
+  { name: 'Ananya M.', role: 'Beauty Blogger', text: 'The face analysis is incredibly precise. It identified my face shape and eye shape perfectly. Game changer for content creators.', avatar: 'A' },
+  { name: 'Ritika K.', role: 'Bridal Client', text: 'Used this before my wedding consultation. The bridal recommendations matched exactly what my makeup artist suggested. Impressed!', avatar: 'R' },
 ];
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen pt-16">
-      {/* Hero */}
-      <section className="relative overflow-hidden px-6 py-24 md:py-36">
-        <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-pink-200/30 blur-3xl" />
-        <div className="absolute -right-24 top-16 h-80 w-80 rounded-full bg-orange-100/40 blur-3xl" />
-        <div className="relative mx-auto max-w-5xl text-center">
-          <div className="inline-block rounded-full bg-pink-50 px-4 py-1.5 text-xs font-medium text-pink-600">AI-Powered Beauty Platform</div>
-          <h1 className="mt-6 font-serif text-5xl leading-[1.08] tracking-tight text-sand-900 md:text-7xl">
-            AI Beauty<br />Recommendation Platform
+
+      {/* ── Section 1: Hero ── */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="h-full w-full object-cover"
+          >
+            <source src="https://v1.pinimg.com/videos/iht/720p/f1/44/46/f14446ab19c46e69104b8e08d65f720f.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+          <div className="inline-block rounded-full border border-white/20 bg-white/10 px-5 py-1.5 text-xs font-medium tracking-wider text-white/90 backdrop-blur-sm">
+            AI-POWERED BEAUTY PLATFORM
+          </div>
+          <h1 className="mt-6 font-serif text-5xl leading-[1.05] tracking-tight text-white md:text-7xl lg:text-8xl">
+            Your Perfect Shade,
+            <br />
+            <span className="italic text-pink-300">Found by AI</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-cocoa/65 md:text-lg">
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
             Upload a selfie and receive personalized beauty recommendations powered by Computer Vision, LLMs, and Explainable AI.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link to="/auth" className="rounded-full bg-sand-900 px-8 py-3.5 text-sm font-medium text-white shadow-glow transition hover:translate-y-[-2px]">Try Demo</Link>
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="rounded-full border border-sand-200 bg-white px-8 py-3.5 text-sm font-medium text-sand-900 transition hover:bg-sand-50">View GitHub</a>
-          </div>
-
-          {/* Hero Video */}
-          <div className="mx-auto mt-16 max-w-2xl overflow-hidden rounded-3xl border border-sand-100 shadow-soft">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full aspect-square object-cover"
-              poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Crect fill='%23FFD3D6' width='240' height='240'/%3E%3C/svg%3E"
+            <Link
+              to="/auth"
+              className="rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-sand-900 shadow-lg transition hover:translate-y-[-2px] hover:shadow-xl"
             >
-              <source src="https://v1.pinimg.com/videos/iht/720p/f1/44/46/f14446ab19c46e69104b8e08d65f720f.mp4" type="video/mp4" />
-            </video>
+              Try Demo Free
+            </Link>
+            <a
+              href="#about"
+              className="rounded-full border border-white/30 bg-white/10 px-8 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white/20"
+            >
+              Learn More
+            </a>
+          </div>
+
+          {/* Trusted logos */}
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-white/40">
+            <span className="text-xs font-medium tracking-widest uppercase">PyTorch</span>
+            <span className="text-white/20">|</span>
+            <span className="text-xs font-medium tracking-widest uppercase">FastAPI</span>
+            <span className="text-white/20">|</span>
+            <span className="text-xs font-medium tracking-widest uppercase">Ollama</span>
+            <span className="text-white/20">|</span>
+            <span className="text-xs font-medium tracking-widest uppercase">PostgreSQL</span>
+            <span className="text-white/20">|</span>
+            <span className="text-xs font-medium tracking-widest uppercase">React</span>
           </div>
         </div>
-      </section>
 
-      {/* Trusted Technologies */}
-      <section className="px-6 py-12">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cocoa/40">Trusted Technologies</p>
-          <p className="mt-3 text-sm text-cocoa/60">PyTorch &bull; FastAPI &bull; Ollama &bull; PostgreSQL &bull; JWT &bull; React</p>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+          <svg className="h-6 w-6 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="px-6 py-24">
+      {/* ── Section 2: About ── */}
+      <section id="about" className="px-6 py-24 md:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cocoa/40">Capabilities</p>
-            <h2 className="mt-3 font-serif text-3xl tracking-tight text-sand-900 md:text-5xl">Built for Real Beauty Tech</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cocoa/40">About ASTREA</p>
+            <h2 className="mt-3 font-serif text-3xl tracking-tight text-sand-900 md:text-5xl">Intelligence Meets Beauty</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-cocoa/60">
+              We combine deep learning, computer vision, and large language models to deliver hyper-personalized makeup recommendations that understand you.
+            </p>
           </div>
+
           <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {features.map((f) => (
+            {[
+              { icon: '🔍', title: 'AI Face Detection', desc: 'CNN-powered analysis using PyTorch and OpenCV for skin tone, undertone, and face shape detection.', tag: 'Computer Vision' },
+              { icon: '🤖', title: 'LLM Beauty Assistant', desc: 'RAG-powered chatbot that answers beauty questions using your personal profile.', tag: 'Ollama' },
+              { icon: '🎯', title: 'Recommendation Engine', desc: 'Cosine similarity matching against product catalog with feedback-driven re-ranking.', tag: 'Personalized' },
+              { icon: '📈', title: 'Feedback Learning', desc: 'System improves over time using exponential moving average preference weighting.', tag: 'Adaptive' },
+            ].map((f) => (
               <div key={f.title} className="group rounded-2xl border border-sand-100 bg-white p-6 transition hover:border-pink-200 hover:shadow-lg">
                 <span className="text-3xl">{f.icon}</span>
-                <p className="mt-3 text-xs font-medium text-pink-500">{f.desc}</p>
-                <h3 className="mt-1 font-serif text-lg font-semibold text-sand-900">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-cocoa/60">{f.detail}</p>
+                <span className="ml-2 rounded-full bg-pink-50 px-2.5 py-0.5 text-[0.6rem] font-semibold text-pink-600">{f.tag}</span>
+                <h3 className="mt-3 font-serif text-lg font-semibold text-sand-900">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-cocoa/60">{f.desc}</p>
               </div>
             ))}
+          </div>
+
+          {/* Architecture preview */}
+          <div className="mt-16 rounded-3xl border border-sand-100 bg-white p-8 md:p-12">
+            <h3 className="text-center text-xs font-semibold uppercase tracking-widest text-cocoa/40">System Architecture</h3>
+            <pre className="mx-auto mt-6 max-w-lg overflow-x-auto text-center text-xs leading-relaxed text-cocoa/60 font-mono">
+{`    Image Upload
+         │
+         ▼
+  ┌──────────────┐
+  │   PyTorch    │
+  │  Face Analysis│
+  └──────┬───────┘
+         ▼
+  ┌──────────────┐
+  │  Cosine Sim  │
+  │Recommendation│
+  └──────┬───────┘
+    ┌────┴────┐
+    ▼         ▼
+┌───────┐ ┌───────┐
+│ Ollama│ │  DB   │
+│  LLM  │ │ Postgr│
+└───────┘ └───────┘`}
+            </pre>
           </div>
         </div>
       </section>
 
-      {/* AI Pipeline */}
-      <section className="px-6 py-24 bg-sand-50/50">
+      {/* ── Section 3: Get Started ── */}
+      <section className="px-6 py-24 md:py-32 bg-sand-50/50">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cocoa/40">AI Pipeline</p>
-            <h2 className="mt-3 font-serif text-3xl tracking-tight text-sand-900 md:text-5xl">End-to-End Intelligence</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cocoa/40">How It Works</p>
+            <h2 className="mt-3 font-serif text-3xl tracking-tight text-sand-900 md:text-5xl">Get Started in 4 Steps</h2>
           </div>
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-4">
-            {pipeline.map((p, i) => (
-              <div key={p.step} className="flex items-center gap-3">
-                <div className="flex items-center gap-3 rounded-2xl border border-sand-100 bg-white px-5 py-4 transition hover:shadow-md">
-                  <span className="text-2xl">{p.icon}</span>
-                  <span className="text-sm font-medium text-sand-900">{p.step}</span>
+
+          <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { num: '01', title: 'Sign Up', desc: 'Create your free account in seconds.', icon: '👤' },
+              { num: '02', title: 'Upload Photo', desc: 'Take a selfie or upload any face photo.', icon: '📷' },
+              { num: '03', title: 'AI Analysis', desc: 'Get instant face and skin tone analysis.', icon: '🧠' },
+              { num: '04', title: 'Get Matched', desc: 'Receive personalized product recommendations.', icon: '💄' },
+            ].map((s) => (
+              <div key={s.num} className="relative rounded-2xl border border-sand-100 bg-white p-6 text-center transition hover:shadow-lg">
+                <span className="text-3xl">{s.icon}</span>
+                <div className="mx-auto mt-3 flex h-10 w-10 items-center justify-center rounded-full bg-sand-900 font-serif text-sm font-semibold text-white">
+                  {s.num}
                 </div>
-                {i < pipeline.length - 1 && (
-                  <svg className="h-5 w-5 shrink-0 text-cocoa/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                )}
+                <h3 className="mt-3 font-serif text-lg font-semibold text-sand-900">{s.title}</h3>
+                <p className="mt-1 text-sm text-cocoa/60">{s.desc}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link
+              to="/auth"
+              className="inline-block rounded-full bg-sand-900 px-10 py-4 text-sm font-semibold text-white shadow-glow transition hover:translate-y-[-2px]"
+            >
+              Get Started Free
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Tech Stack */}
-      <section id="tech" className="px-6 py-24">
+      {/* ── Section 4: Reviews ── */}
+      <section className="px-6 py-24 md:py-32">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cocoa/40">Tech Stack</p>
-            <h2 className="mt-3 font-serif text-3xl tracking-tight text-sand-900 md:text-5xl">Production-Grade Stack</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cocoa/40">Testimonials</p>
+            <h2 className="mt-3 font-serif text-3xl tracking-tight text-sand-900 md:text-5xl">Loved by Beauty Enthusiasts</h2>
           </div>
-          <div className="mt-16 grid gap-6 md:grid-cols-3 lg:grid-cols-5">
-            {techStack.map((t) => (
-              <div key={t.category} className="rounded-2xl border border-sand-100 bg-white p-6 text-center">
-                <p className="text-xs font-semibold uppercase tracking-widest text-pink-500">{t.category}</p>
-                <div className="mt-3 space-y-1.5">
-                  {t.items.map((item) => (
-                    <p key={item} className="text-sm font-medium text-sand-900">{item}</p>
+
+          <div className="mt-16 grid gap-6 md:grid-cols-3">
+            {reviews.map((r) => (
+              <div key={r.name} className="rounded-2xl border border-sand-100 bg-white p-6 transition hover:shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-pink-300 to-rose-300 font-serif text-sm font-semibold text-white">
+                    {r.avatar}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-sand-900">{r.name}</p>
+                    <p className="text-xs text-cocoa/50">{r.role}</p>
+                  </div>
+                </div>
+                <p className="mt-4 text-sm leading-relaxed text-cocoa/65">{r.text}</p>
+                <div className="mt-3 flex gap-0.5">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <svg key={s} className="h-4 w-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
                   ))}
                 </div>
               </div>
@@ -135,66 +201,21 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Architecture */}
-      <section id="architecture" className="px-6 py-24 bg-sand-50/50">
-        <div className="mx-auto max-w-4xl">
-          <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cocoa/40">Architecture</p>
-            <h2 className="mt-3 font-serif text-3xl tracking-tight text-sand-900 md:text-5xl">System Design</h2>
-          </div>
-          <div className="mt-16 rounded-3xl border border-sand-100 bg-white p-8 md:p-12">
-            <pre className="overflow-x-auto text-center text-sm leading-relaxed text-cocoa/70 font-mono">
-{`        User
-          │
-          ▼
-    ┌──────────┐
-    │  React   │
-    │ Frontend │
-    └────┬─────┘
-         │ REST APIs
-         ▼
-    ┌──────────┐
-    │ FastAPI  │
-    │ Backend  │
-    └────┬─────┘
-    ┌────┴─────────┐
-    │              │
-    ▼              ▼
-┌────────┐   ┌──────────┐
-│PyTorch │   │ Ollama   │
-│  CV    │   │  LLM     │
-└───┬────┘   └────┬─────┘
-    │              │
-    └──────┬───────┘
-           ▼
-  ┌────────────────┐
-  │ Recommendation │
-  │    Engine      │
-  └───────┬────────┘
-          ▼
-  ┌────────────────┐
-  │  PostgreSQL    │
-  │  + Analytics   │
-  └────────────────┘`}
-            </pre>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
+      {/* ── Section 5: CTA ── */}
       <section className="px-6 py-24">
         <div className="mx-auto max-w-4xl">
           <div className="overflow-hidden rounded-3xl bg-sand-900 p-12 text-center text-pearl shadow-glow md:p-16">
             <h2 className="font-serif text-3xl leading-tight md:text-5xl">Ready to discover your perfect shade?</h2>
             <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-pearl/70">
-              Experience AI-powered beauty recommendations tailored to your unique features.
+              Join ASTREA and experience AI-powered beauty recommendations tailored to your unique features.
             </p>
-            <Link to="/auth" className="mt-10 inline-block rounded-full bg-white px-8 py-3.5 text-sm font-medium text-sand-900 shadow-lg transition hover:translate-y-[-2px]">
-              Get Started Free
+            <Link to="/auth" className="mt-10 inline-block rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-sand-900 shadow-lg transition hover:translate-y-[-2px]">
+              Start Now — It's Free
             </Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 }
