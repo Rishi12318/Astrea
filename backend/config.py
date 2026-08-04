@@ -16,8 +16,7 @@ class Settings(BaseSettings):
     ollama_model: str = "llama3.1"
     anthropic_api_key: str | None = None
 
-
-    model_config = SettingsConfigDict(env_file=".env", case_sensitive=False)
+    model_config = SettingsConfigDict(env_file=".env", case_sensitive=False, extra="ignore")
 
     @property
     def cors_origin_list(self) -> list[str]:

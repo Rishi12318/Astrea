@@ -170,22 +170,6 @@ export default function LandingPage() {
               <PaletteCard />
             </div>
 
-            {/* Feature Cards */}
-            <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {[
-                { icon: '🔍', title: 'AI Face Detection', desc: 'CNN-powered analysis using PyTorch and OpenCV for skin tone, undertone, and face shape detection.', tag: 'Computer Vision' },
-                { icon: '🤖', title: 'LLM Beauty Assistant', desc: 'RAG-powered chatbot that answers beauty questions using your personal profile.', tag: 'Ollama' },
-                { icon: '🎯', title: 'Recommendation Engine', desc: 'Cosine similarity matching against product catalog with feedback-driven re-ranking.', tag: 'Personalized' },
-                { icon: '📈', title: 'Feedback Learning', desc: 'System improves over time using exponential moving average preference weighting.', tag: 'Adaptive' },
-              ].map((f) => (
-                <div key={f.title} className="group rounded-2xl border border-white/50 bg-white/70 p-6 backdrop-blur-sm transition hover:border-[#550000]/20 hover:bg-white hover:shadow-lg">
-                  <span className="text-3xl">{f.icon}</span>
-                  <span className="ml-2 rounded-full bg-[#550000]/10 px-2.5 py-0.5 text-[0.6rem] font-semibold text-[#550000]">{f.tag}</span>
-                  <h3 className="mt-3 font-serif text-lg font-semibold text-[#1a1a1a]">{f.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#5A4F43]/60">{f.desc}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
