@@ -31,7 +31,7 @@ export default function LandingPage() {
       <section className="relative overflow-hidden px-6 py-24 md:py-36">
         <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-pink-200/30 blur-3xl" />
         <div className="absolute -right-24 top-16 h-80 w-80 rounded-full bg-orange-100/40 blur-3xl" />
-        <div className="relative mx-auto max-w-4xl text-center">
+        <div className="relative mx-auto max-w-5xl text-center">
           <div className="inline-block rounded-full bg-pink-50 px-4 py-1.5 text-xs font-medium text-pink-600">AI-Powered Beauty Platform</div>
           <h1 className="mt-6 font-serif text-5xl leading-[1.08] tracking-tight text-sand-900 md:text-7xl">
             AI Beauty<br />Recommendation Platform
@@ -42,6 +42,20 @@ export default function LandingPage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link to="/auth" className="rounded-full bg-sand-900 px-8 py-3.5 text-sm font-medium text-white shadow-glow transition hover:translate-y-[-2px]">Try Demo</Link>
             <a href="https://github.com" target="_blank" rel="noreferrer" className="rounded-full border border-sand-200 bg-white px-8 py-3.5 text-sm font-medium text-sand-900 transition hover:bg-sand-50">View GitHub</a>
+          </div>
+
+          {/* Hero Video */}
+          <div className="mx-auto mt-16 max-w-2xl overflow-hidden rounded-3xl border border-sand-100 shadow-soft">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full aspect-square object-cover"
+              poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Crect fill='%23FFD3D6' width='240' height='240'/%3E%3C/svg%3E"
+            >
+              <source src="https://v1.pinimg.com/videos/iht/720p/f1/44/46/f14446ab19c46e69104b8e08d65f720f.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </section>
