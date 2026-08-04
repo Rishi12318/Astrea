@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const reviews = [
@@ -5,6 +6,120 @@ const reviews = [
   { name: 'Ananya M.', role: 'Beauty Blogger', text: 'The face analysis is incredibly precise. It identified my face shape and eye shape perfectly. Game changer for content creators.', avatar: 'A' },
   { name: 'Ritika K.', role: 'Bridal Client', text: 'Used this before my wedding consultation. The bridal recommendations matched exactly what my makeup artist suggested. Impressed!', avatar: 'R' },
 ];
+
+const slides = [
+  {
+    video: 'https://v1.pinimg.com/videos/iht/expMp4/68/81/5e/68815e08d2c14dfbf89a8f7d18258aaf_720w.mp4',
+    title: 'This is your time to shine, diva',
+    desc: 'Let AI find the shades that make you glow. Your beauty, amplified by intelligence.',
+  },
+  {
+    video: 'https://v1.pinimg.com/videos/iht/720p/73/90/c4/7390c46af4c2b04106ef003291f74ee7.mp4',
+    title: 'Know your skin type',
+    desc: 'Our CNN detects your exact skin tone, undertone, and face shape in seconds. Precision beauty starts with understanding you.',
+  },
+];
+
+function PaletteCard() {
+  const [active, setActive] = useState(0);
+  const [fading, setFading] = useState(false);
+  const videoRef1 = useRef<HTMLVideoElement>(null);
+  const videoRef2 = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = active === 0 ? videoRef1.current : videoRef2.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      if (video.currentTime >= video.duration - 0.5) {
+        setFading(true);
+        setTimeout(() => {
+          setActive((prev) => (prev + 1) % 2);
+          setFading(false);
+        }, 600);
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    return () => video.removeEventListener('timeupdate', handleTimeUpdate);
+  }, [active]);
+
+  useEffect(() => {
+    const video = active === 0 ? videoRef1.current : videoRef2.current;
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+  }, [active]);
+
+  const panColors = [
+    ['from-[#550000]/60 to-[#550000]/40', 'from-[#3A332B]/80 to-[#5A4F43]/60', 'from-[#550000]/80 to-[#550000]/60', 'from-[#1a1a1a]/80 to-[#1a1a1a]/60', 'from-[#5A4F43]/60 to-[#3A332B]/80', 'from-[#550000]/70 to-[#550000]/50', 'from-[#C4B5A6]/50 to-[#B3A291]/60', 'from-[#550000]/90 to-[#550000]/70', 'from-[#1a1a1a]/70 to-[#1a1a1a]/50', 'from-[#5A4F43]/50 to-[#3A332B]/70'],
+    ['from-[#C4B5A6]/60 to-[#D4C9BB]/50', 'from-[#550000]/60 to-[#550000]/40', 'from-[#3A332B]/80 to-[#5A4F43]/60', 'from-[#550000]/80 to-[#550000]/60', 'from-[#D4C9BB]/50 to-[#C4B5A6]/60', 'from-[#550000]/70 to-[#550000]/50', 'from-[#E5DDD3]/50 to-[#D4C9BB]/60', 'from-[#5A4F43]/60 to-[#3A332B]/80', 'from-[#1a1a1a]/70 to-[#1a1a1a]/50', 'from-[#C4B5A6]/40 to-[#B3A291]/50'],
+  ];
+
+  return (
+    <div className="flex flex-col items-center gap-10 md:flex-row md:items-center md:justify-center">
+      {/* Palette Card */}
+      <div className="relative w-full max-w-md">
+        <div className="rounded-[2rem] border-2 border-[#550000]/30 bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] p-6 shadow-2xl">
+          <div className="mb-4 flex items-center justify-between">
+            <span className="font-serif text-sm font-semibold tracking-wider text-white/70">ASTREA</span>
+            <span className="text-[0.6rem] uppercase tracking-widest text-white/30">Palette</span>
+          </div>
+          <div className="grid grid-cols-4 grid-rows-3 gap-2.5">
+            {panColors[active].slice(0, 5).map((c, i) => (
+              <div key={`a-${i}`} className={`aspect-square rounded-xl bg-gradient-to-br ${c} shadow-inner transition-all duration-700`} />
+            ))}
+            <div className="col-span-2 row-span-2 aspect-square overflow-hidden rounded-2xl border-2 border-white/20 shadow-lg relative">
+              <video
+                ref={videoRef1}
+                autoPlay={active === 0}
+                muted
+                playsInline
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-600 ${active === 0 ? 'opacity-100' : 'opacity-0'}`}
+              >
+                <source src={slides[0].video} type="video/mp4" />
+              </video>
+              <video
+                ref={videoRef2}
+                autoPlay={active === 1}
+                muted
+                playsInline
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-600 ${active === 1 ? 'opacity-100' : 'opacity-0'}`}
+              >
+                <source src={slides[1].video} type="video/mp4" />
+              </video>
+            </div>
+            {panColors[active].slice(5).map((c, i) => (
+              <div key={`b-${i}`} className={`aspect-square rounded-xl bg-gradient-to-br ${c} shadow-inner transition-all duration-700`} />
+            ))}
+          </div>
+          <div className="mt-4 flex items-center justify-center gap-2">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => { setFading(true); setTimeout(() => { setActive(i); setFading(false); }, 300); }}
+                className={`h-1.5 rounded-full transition-all duration-300 ${active === i ? 'w-6 bg-white/60' : 'w-1.5 bg-white/20'}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Text */}
+      <div className="text-center md:text-left md:max-w-sm">
+        <div className={`transition-opacity duration-500 ${fading ? 'opacity-0' : 'opacity-100'}`}>
+          <p className="font-serif text-4xl leading-snug italic tracking-wide text-[#1a1a1a] md:text-5xl">
+            {slides[active].title}
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-[#5A4F43]/55">
+            {slides[active].desc}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function LandingPage() {
   return (
@@ -50,88 +165,9 @@ export default function LandingPage() {
               </p>
             </div>
 
-            {/* Palette Card 1 */}
-            <div className="mt-16 flex flex-col items-center gap-10 md:flex-row md:items-center md:justify-center">
-              <div className="relative w-full max-w-md">
-                <div className="rounded-[2rem] border-2 border-[#550000]/30 bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] p-6 shadow-2xl">
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="font-serif text-sm font-semibold tracking-wider text-white/70">ASTREA</span>
-                    <span className="text-[0.6rem] uppercase tracking-widest text-white/30">Eyeshadow Palette</span>
-                  </div>
-                  <div className="grid grid-cols-4 grid-rows-3 gap-2.5">
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#550000]/60 to-[#550000]/40 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#3A332B]/80 to-[#5A4F43]/60 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#550000]/80 to-[#550000]/60 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#1a1a1a]/80 to-[#1a1a1a]/60 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#5A4F43]/60 to-[#3A332B]/80 shadow-inner" />
-                    <div className="col-span-2 row-span-2 aspect-square overflow-hidden rounded-2xl border-2 border-white/20 shadow-lg">
-                      <video autoPlay loop muted playsInline className="h-full w-full object-cover">
-                        <source src="https://v1.pinimg.com/videos/iht/expMp4/68/81/5e/68815e08d2c14dfbf89a8f7d18258aaf_720w.mp4" type="video/mp4" />
-                      </video>
-                    </div>
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#550000]/70 to-[#550000]/50 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#C4B5A6]/50 to-[#B3A291]/60 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#550000]/90 to-[#550000]/70 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#1a1a1a]/70 to-[#1a1a1a]/50 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#5A4F43]/50 to-[#3A332B]/70 shadow-inner" />
-                  </div>
-                  <div className="mt-4 flex items-center justify-center gap-1.5">
-                    <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                    <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
-                    <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                  </div>
-                </div>
-              </div>
-              <div className="text-center md:text-left md:max-w-sm">
-                <p className="font-serif text-4xl leading-snug italic tracking-wide text-[#1a1a1a] md:text-5xl">
-                  This is your time to shine, diva
-                </p>
-                <p className="mt-4 text-sm leading-relaxed text-[#5A4F43]/55">
-                  Let AI find the shades that make you glow. Your beauty, amplified by intelligence.
-                </p>
-              </div>
-            </div>
-
-            {/* Palette Card 2 */}
-            <div className="mt-16 flex flex-col-reverse items-center gap-10 md:flex-row md:items-center md:justify-center">
-              <div className="text-center md:text-right md:max-w-sm">
-                <p className="font-serif text-4xl leading-snug italic tracking-wide text-[#1a1a1a] md:text-5xl">
-                  Know your skin type
-                </p>
-                <p className="mt-4 text-sm leading-relaxed text-[#5A4F43]/55">
-                  Our CNN detects your exact skin tone, undertone, and face shape in seconds. Precision beauty starts with understanding you.
-                </p>
-              </div>
-              <div className="relative w-full max-w-md">
-                <div className="rounded-[2rem] border-2 border-[#550000]/30 bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] p-6 shadow-2xl">
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="font-serif text-sm font-semibold tracking-wider text-white/70">ASTREA</span>
-                    <span className="text-[0.6rem] uppercase tracking-widest text-white/30">Skin Analysis</span>
-                  </div>
-                  <div className="grid grid-cols-4 grid-rows-3 gap-2.5">
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#C4B5A6]/60 to-[#D4C9BB]/50 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#550000]/60 to-[#550000]/40 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#3A332B]/80 to-[#5A4F43]/60 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#550000]/80 to-[#550000]/60 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#D4C9BB]/50 to-[#C4B5A6]/60 shadow-inner" />
-                    <div className="col-span-2 row-span-2 aspect-square overflow-hidden rounded-2xl border-2 border-white/20 shadow-lg">
-                      <video autoPlay loop muted playsInline className="h-full w-full object-cover">
-                        <source src="https://v1.pinimg.com/videos/iht/720p/73/90/c4/7390c46af4c2b04106ef003291f74ee7.mp4" type="video/mp4" />
-                      </video>
-                    </div>
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#550000]/70 to-[#550000]/50 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#E5DDD3]/50 to-[#D4C9BB]/60 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#5A4F43]/60 to-[#3A332B]/80 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#1a1a1a]/70 to-[#1a1a1a]/50 shadow-inner" />
-                    <div className="aspect-square rounded-xl bg-gradient-to-br from-[#C4B5A6]/40 to-[#B3A291]/50 shadow-inner" />
-                  </div>
-                  <div className="mt-4 flex items-center justify-center gap-1.5">
-                    <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                    <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
-                    <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                  </div>
-                </div>
-              </div>
+            {/* Palette Card with rotating videos */}
+            <div className="mt-16">
+              <PaletteCard />
             </div>
 
             {/* Feature Cards */}
@@ -149,31 +185,6 @@ export default function LandingPage() {
                   <p className="mt-2 text-sm leading-relaxed text-[#5A4F43]/60">{f.desc}</p>
                 </div>
               ))}
-            </div>
-
-            {/* Architecture preview */}
-            <div className="mt-16 rounded-3xl border border-white/50 bg-white/70 p-8 backdrop-blur-sm md:p-12">
-              <h3 className="text-center text-xs font-semibold uppercase tracking-widest text-[#550000]/40">System Architecture</h3>
-              <pre className="mx-auto mt-6 max-w-lg overflow-x-auto text-center text-xs leading-relaxed text-[#5A4F43]/60 font-mono">
-{`    Image Upload
-         │
-         ▼
-  ┌──────────────┐
-  │   PyTorch    │
-  │  Face Analysis│
-  └──────┬───────┘
-         ▼
-  ┌──────────────┐
-  │  Cosine Sim  │
-  │Recommendation│
-  └──────┬───────┘
-    ┌────┴────┐
-    ▼         ▼
-┌───────┐ ┌───────┐
-│ Ollama│ │  DB   │
-│  LLM  │ │ Postgr│
-└───────┘ └───────┘`}
-              </pre>
             </div>
           </div>
         </div>
