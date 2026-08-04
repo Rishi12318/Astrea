@@ -174,43 +174,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Get Started ── */}
-      <section className="px-6 py-24 md:py-32 bg-[#F0EBE3]/50">
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#550000]/40">How It Works</p>
-            <h2 className="mt-3 font-serif text-3xl tracking-tight text-[#1a1a1a] md:text-5xl">Get Started in 4 Steps</h2>
-          </div>
-
-          <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              { num: '01', title: 'Sign Up', desc: 'Create your free account in seconds.', icon: '👤' },
-              { num: '02', title: 'Upload Photo', desc: 'Take a selfie or upload any face photo.', icon: '📷' },
-              { num: '03', title: 'AI Analysis', desc: 'Get instant face and skin tone analysis.', icon: '🧠' },
-              { num: '04', title: 'Get Matched', desc: 'Receive personalized product recommendations.', icon: '💄' },
-            ].map((s) => (
-              <div key={s.num} className="relative rounded-2xl border border-[#E5DDD3] bg-white p-6 text-center transition hover:shadow-lg">
-                <span className="text-3xl">{s.icon}</span>
-                <div className="mx-auto mt-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#550000] font-serif text-sm font-semibold text-white">
-                  {s.num}
-                </div>
-                <h3 className="mt-3 font-serif text-lg font-semibold text-[#1a1a1a]">{s.title}</h3>
-                <p className="mt-1 text-sm text-[#5A4F43]/60">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              to="/auth"
-              className="inline-block rounded-full bg-[#550000] px-10 py-4 text-sm font-semibold text-white shadow-glow transition hover:translate-y-[-2px]"
-            >
-              Get Started Free
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* ── Reviews ── */}
       <section className="px-6 py-24 md:py-32 bg-[#FAF8F5]">
         <div className="mx-auto max-w-5xl">
