@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { analyzeFace, predictSkinTone, recommendProducts, saveHistory, fetchAnalytics } from '../services/api';
+import { analyzeFace, recommendProducts, saveHistory, fetchAnalytics } from '../services/api';
 import type { AnalysisResponse } from '../types';
 
 export default function AnalysisPage() {
@@ -46,19 +46,19 @@ export default function AnalysisPage() {
   }
 
   const attributes = analysis ? [
-    { label: 'Skin Tone', value: analysis.skin_tone, color: 'bg-amber-50 text-amber-700' },
-    { label: 'Undertone', value: analysis.undertone, color: 'bg-rose-50 text-rose-700' },
-    { label: 'Face Shape', value: analysis.face_shape, color: 'bg-pink-50 text-pink-700' },
-    { label: 'Lip Shape', value: analysis.lip_shape, color: 'bg-fuchsia-50 text-fuchsia-700' },
-    { label: 'Eye Shape', value: analysis.eye_shape, color: 'bg-purple-50 text-purple-700' },
-    { label: 'Confidence', value: `${Math.round(analysis.confidence * 100)}%`, color: 'bg-emerald-50 text-emerald-700' },
+    { label: 'Skin Tone', value: analysis.skin_tone, bg: 'bg-[#F0EBE3]', text: 'text-[#3A332B]' },
+    { label: 'Undertone', value: analysis.undertone, bg: 'bg-[#550000]/10', text: 'text-[#550000]' },
+    { label: 'Face Shape', value: analysis.face_shape, bg: 'bg-[#F0EBE3]', text: 'text-[#3A332B]' },
+    { label: 'Lip Shape', value: analysis.lip_shape, bg: 'bg-[#550000]/10', text: 'text-[#550000]' },
+    { label: 'Eye Shape', value: analysis.eye_shape, bg: 'bg-[#F0EBE3]', text: 'text-[#3A332B]' },
+    { label: 'Confidence', value: `${Math.round(analysis.confidence * 100)}%`, bg: 'bg-[#550000]/10', text: 'text-[#550000]' },
   ] : [];
 
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-serif text-3xl font-semibold text-sand-900">Face Analysis</h1>
-        <p className="mt-1 text-sm text-cocoa/55">Upload a photo to analyze your facial features and skin profile.</p>
+        <h1 className="font-serif italic text-3xl font-semibold text-[#1a1a1a]">Face Analysis</h1>
+        <p className="mt-1 text-sm text-[#5A4F43]/55">Upload a photo to analyze your facial features and skin profile.</p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
@@ -70,7 +70,7 @@ export default function AnalysisPage() {
             onDrop={handleDrop}
             onClick={() => fileRef.current?.click()}
             className={`flex min-h-[320px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed transition ${
-              dragging ? 'border-pink-400 bg-pink-50/50' : 'border-sand-200 bg-sand-50/30 hover:border-pink-300 hover:bg-pink-50/30'
+              dragging ? 'border-[#550000] bg-[#550000]/5' : 'border-[#E5DDD3] bg-[#F0EBE3]/30 hover:border-[#550000]/40 hover:bg-[#550000]/5'
             }`}
           >
             <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => handleFile(e.target.files?.[0] ?? null)} />
@@ -78,59 +78,59 @@ export default function AnalysisPage() {
               <img src={imagePreview} alt="preview" className="max-h-80 rounded-xl object-contain" />
             ) : (
               <div className="text-center">
-                <svg className="mx-auto h-12 w-12 text-cocoa/25" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <svg className="mx-auto h-12 w-12 text-[#5A4F43]/25" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />
                 </svg>
-                <p className="mt-3 text-sm font-medium text-cocoa/50">Drag & Drop</p>
-                <p className="mt-1 text-xs text-cocoa/35">or <span className="text-pink-500">Browse Image</span></p>
+                <p className="mt-3 text-sm font-medium text-[#5A4F43]/50">Drag & Drop</p>
+                <p className="mt-1 text-xs text-[#5A4F43]/35">or <span className="text-[#550000]">Browse Image</span></p>
               </div>
             )}
           </div>
 
           {/* Options */}
-          <div className="rounded-2xl border border-sand-100 bg-white p-5">
+          <div className="rounded-2xl border border-[#E5DDD3] bg-white p-5">
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <p className="text-xs font-semibold text-cocoa/60 mb-2">Occasion</p>
+                <p className="text-xs font-semibold text-[#5A4F43]/60 mb-2">Occasion</p>
                 <div className="space-y-2">
                   {['wedding', 'party', 'office', 'casual'].map((o) => (
                     <label key={o} className="flex items-center gap-2.5 cursor-pointer">
-                      <input type="radio" name="occasion" value={o} checked={occasion === o} onChange={(e) => setOccasion(e.target.value)} className="accent-sand-900" />
-                      <span className="text-sm text-cocoa/70 capitalize">{o}</span>
+                      <input type="radio" name="occasion" value={o} checked={occasion === o} onChange={(e) => setOccasion(e.target.value)} className="accent-[#550000]" />
+                      <span className="text-sm text-[#5A4F43]/70 capitalize">{o}</span>
                     </label>
                   ))}
                 </div>
               </div>
               <div>
-                <p className="text-xs font-semibold text-cocoa/60 mb-2">Style</p>
+                <p className="text-xs font-semibold text-[#5A4F43]/60 mb-2">Style</p>
                 <div className="space-y-2">
                   {['natural', 'soft glam', 'bold'].map((s) => (
                     <label key={s} className="flex items-center gap-2.5 cursor-pointer">
-                      <input type="radio" name="style" value={s} checked={style === s} onChange={(e) => setStyle(e.target.value)} className="accent-sand-900" />
-                      <span className="text-sm text-cocoa/70 capitalize">{s}</span>
+                      <input type="radio" name="style" value={s} checked={style === s} onChange={(e) => setStyle(e.target.value)} className="accent-[#550000]" />
+                      <span className="text-sm text-[#5A4F43]/70 capitalize">{s}</span>
                     </label>
                   ))}
                 </div>
               </div>
             </div>
-            <button disabled={busy || !imageFile} onClick={handleAnalyze} className="mt-5 w-full rounded-xl bg-sand-900 py-3 text-sm font-medium text-white transition hover:bg-sand-800 disabled:opacity-50">
+            <button disabled={busy || !imageFile} onClick={handleAnalyze} className="mt-5 w-full rounded-xl bg-[#550000] py-3 text-sm font-medium text-white transition hover:bg-[#450000] disabled:opacity-50">
               {busy ? 'Analyzing...' : 'Analyze Face'}
             </button>
-            {status && <p className="mt-2 text-xs text-cocoa/50">{status}</p>}
+            {status && <p className="mt-2 text-xs text-[#5A4F43]/50">{status}</p>}
           </div>
         </div>
 
         {/* Results */}
         <div className="space-y-6">
           {attributes.length > 0 && (
-            <div className="rounded-2xl border border-sand-100 bg-white p-6">
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-cocoa/40">Face Attributes</h3>
+            <div className="rounded-2xl border border-[#E5DDD3] bg-white p-6">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-[#550000]/40">Face Attributes</h3>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {attributes.map((a) => (
-                  <div key={a.label} className={`rounded-xl p-4 ${a.color.split(' ')[0]}`}>
-                    <p className="text-xs text-cocoa/50">{a.label}</p>
-                    <p className={`mt-1 text-sm font-semibold ${a.color.split(' ')[1]}`}>{a.value}</p>
+                  <div key={a.label} className={`rounded-xl p-4 ${a.bg}`}>
+                    <p className="text-xs text-[#5A4F43]/50">{a.label}</p>
+                    <p className={`mt-1 text-sm font-semibold ${a.text}`}>{a.value}</p>
                   </div>
                 ))}
               </div>
@@ -138,16 +138,16 @@ export default function AnalysisPage() {
           )}
 
           {analysis?.reasoning && (
-            <div className="rounded-2xl border border-sand-100 bg-white p-6">
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-cocoa/40">AI Reasoning</h3>
-              <p className="mt-3 text-sm leading-relaxed text-cocoa/70">{analysis.reasoning}</p>
+            <div className="rounded-2xl border border-[#E5DDD3] bg-white p-6">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-[#550000]/40">AI Reasoning</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#5A4F43]/70">{analysis.reasoning}</p>
             </div>
           )}
 
           {!analysis && (
-            <div className="flex min-h-[400px] items-center justify-center rounded-2xl border border-dashed border-sand-200 bg-sand-50/30 text-center">
+            <div className="flex min-h-[400px] items-center justify-center rounded-2xl border border-dashed border-[#E5DDD3] bg-[#F0EBE3]/30 text-center">
               <div>
-                <p className="text-sm text-cocoa/40">Upload a photo and click Analyze to see results</p>
+                <p className="text-sm text-[#5A4F43]/40">Upload a photo and click Analyze to see results</p>
               </div>
             </div>
           )}

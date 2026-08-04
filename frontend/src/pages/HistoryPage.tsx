@@ -20,42 +20,42 @@ export default function HistoryPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-serif text-3xl font-semibold text-sand-900">Analysis History</h1>
-        <p className="mt-1 text-sm text-cocoa/55">Your past face analyses and recommendation sessions.</p>
+        <h1 className="font-serif italic text-3xl font-semibold text-[#1a1a1a]">Analysis History</h1>
+        <p className="mt-1 text-sm text-[#5A4F43]/55">Your past face analyses and recommendation sessions.</p>
       </div>
 
-      <div className="rounded-2xl border border-sand-100 bg-white overflow-hidden">
+      <div className="rounded-2xl border border-[#E5DDD3] bg-white overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-sand-100 bg-sand-50/50">
-                <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-cocoa/50">Date</th>
-                <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-cocoa/50">Occasion</th>
-                <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-cocoa/50">Style</th>
-                <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-cocoa/50">Confidence</th>
-                <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-cocoa/50">Actions</th>
+              <tr className="border-b border-[#E5DDD3] bg-[#F0EBE3]/50">
+                <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#5A4F43]/50">Date</th>
+                <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#5A4F43]/50">Occasion</th>
+                <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#5A4F43]/50">Style</th>
+                <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#5A4F43]/50">Confidence</th>
+                <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#5A4F43]/50">Actions</th>
               </tr>
             </thead>
             <tbody>
               {history.map((h, i) => (
-                <tr key={i} className="border-b border-sand-50 transition hover:bg-sand-50/50">
-                  <td className="px-6 py-4 text-sm text-cocoa/70">{h.date}</td>
+                <tr key={i} className="border-b border-[#F0EBE3] transition hover:bg-[#F0EBE3]/50">
+                  <td className="px-6 py-4 text-sm text-[#5A4F43]/70">{h.date}</td>
                   <td className="px-6 py-4">
-                    <span className="rounded-full bg-pink-50 px-3 py-1 text-xs font-medium text-pink-600">{h.occasion}</span>
+                    <span className="rounded-full bg-[#550000]/10 px-3 py-1 text-xs font-medium text-[#550000]">{h.occasion}</span>
                   </td>
-                  <td className="px-6 py-4 text-sm font-medium text-sand-900">{h.style}</td>
+                  <td className="px-6 py-4 text-sm font-medium text-[#1a1a1a]">{h.style}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <div className="h-1.5 w-16 rounded-full bg-sand-100">
-                        <div className="h-full rounded-full bg-pink-400" style={{ width: `${h.confidence}%` }} />
+                      <div className="h-1.5 w-16 rounded-full bg-[#E5DDD3]">
+                        <div className="h-full rounded-full bg-[#550000]" style={{ width: `${h.confidence}%` }} />
                       </div>
-                      <span className="text-xs text-cocoa/55">{h.confidence}%</span>
+                      <span className="text-xs text-[#5A4F43]/55">{h.confidence}%</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <button className="text-xs font-medium text-pink-500 hover:text-pink-600">View</button>
-                    <span className="mx-2 text-cocoa/20">|</span>
-                    <button className="text-xs font-medium text-cocoa/40 hover:text-red-500">Delete</button>
+                    <button className="text-xs font-medium text-[#550000] hover:text-[#450000]">View</button>
+                    <span className="mx-2 text-[#5A4F43]/20">|</span>
+                    <button className="text-xs font-medium text-[#5A4F43]/40 hover:text-[#550000]">Delete</button>
                   </td>
                 </tr>
               ))}

@@ -22,7 +22,7 @@ export default function SplashScreen({ onComplete }: Props) {
         <Lottie animationData={lipstick} loop={false} />
       </div>
       <div className={`mt-6 text-center transition-all duration-700 ${phase === 'anim' ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
-        <h1 className="font-serif text-4xl md:text-5xl font-bold tracking-tight text-white">ASTREA</h1>
+        <h1 className="font-serif italic text-4xl md:text-5xl font-bold tracking-tight text-white">Astrea</h1>
         <p className="mt-3 text-sm md:text-base text-white/50 tracking-widest uppercase">AI Beauty Platform</p>
       </div>
     </div>
