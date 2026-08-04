@@ -95,17 +95,14 @@ export default function LandingPage() {
               </p>
             </div>
 
-            {/* Eye Palette Card + Cursive Quote */}
+            {/* Eye Palette Card 1 + Cursive Quote */}
             <div className="mt-16 flex flex-col items-center gap-10 md:flex-row md:items-center md:justify-center">
-              {/* Eye Palette Card */}
               <div className="relative w-full max-w-md">
                 <div className="rounded-[2rem] border-2 border-[#8B5C5F]/30 bg-gradient-to-br from-[#2C2C2C] to-[#1A1A1A] p-6 shadow-2xl">
-                  {/* Palette lid */}
                   <div className="mb-4 flex items-center justify-between">
                     <span className="font-serif text-sm font-semibold tracking-wider text-white/70">ASTREA</span>
                     <span className="text-[0.6rem] uppercase tracking-widest text-white/30">Eyeshadow Palette</span>
                   </div>
-                  {/* Grid of pans with center video */}
                   <div className="grid grid-cols-4 grid-rows-3 gap-2.5">
                     <div className="aspect-square rounded-xl bg-gradient-to-br from-rose-300 to-pink-400 shadow-inner" />
                     <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner" />
@@ -123,7 +120,6 @@ export default function LandingPage() {
                     <div className="aspect-square rounded-xl bg-gradient-to-br from-pink-400 to-fuchsia-400 shadow-inner" />
                     <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-300 to-orange-400 shadow-inner" />
                   </div>
-                  {/* Palette base */}
                   <div className="mt-4 flex items-center justify-center gap-1.5">
                     <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
                     <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
@@ -131,8 +127,6 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Cursive English Text */}
               <div className="text-center md:text-left md:max-w-sm">
                 <p className="font-serif text-4xl leading-snug italic tracking-wide text-sand-900 md:text-5xl">
                   This is your time to shine, diva
@@ -140,6 +134,48 @@ export default function LandingPage() {
                 <p className="mt-4 text-sm leading-relaxed text-cocoa/55">
                   Let AI find the shades that make you glow. Your beauty, amplified by intelligence.
                 </p>
+              </div>
+            </div>
+
+            {/* Eye Palette Card 2 + Know Your Skin Type */}
+            <div className="mt-16 flex flex-col-reverse items-center gap-10 md:flex-row md:items-center md:justify-center">
+              <div className="text-center md:text-right md:max-w-sm">
+                <p className="font-serif text-4xl leading-snug italic tracking-wide text-sand-900 md:text-5xl">
+                  Know your skin type
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-cocoa/55">
+                  Our CNN detects your exact skin tone, undertone, and face shape in seconds. Precision beauty starts with understanding you.
+                </p>
+              </div>
+              <div className="relative w-full max-w-md">
+                <div className="rounded-[2rem] border-2 border-[#8B5C5F]/30 bg-gradient-to-br from-[#2C2C2C] to-[#1A1A1A] p-6 shadow-2xl">
+                  <div className="mb-4 flex items-center justify-between">
+                    <span className="font-serif text-sm font-semibold tracking-wider text-white/70">ASTREA</span>
+                    <span className="text-[0.6rem] uppercase tracking-widest text-white/30">Skin Analysis</span>
+                  </div>
+                  <div className="grid grid-cols-4 grid-rows-3 gap-2.5">
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-200 to-yellow-300 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-orange-300 to-amber-400 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-rose-300 to-pink-400 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-red-300 to-rose-400 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-300 to-orange-300 shadow-inner" />
+                    <div className="col-span-2 row-span-2 aspect-square overflow-hidden rounded-2xl border-2 border-white/20 shadow-lg">
+                      <video autoPlay loop muted playsInline className="h-full w-full object-cover">
+                        <source src="https://v1.pinimg.com/videos/iht/720p/73/90/c4/7390c46af4c2b04106ef003291f74ee7.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-rose-400 to-red-400 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-orange-200 to-amber-300 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-pink-300 to-rose-400 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-red-200 to-pink-300 shadow-inner" />
+                    <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner" />
+                  </div>
+                  <div className="mt-4 flex items-center justify-center gap-1.5">
+                    <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
+                  </div>
+                </div>
               </div>
             </div>
 
