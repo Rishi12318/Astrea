@@ -15,5 +15,9 @@ backend/coverage/
 ml/.pytest_cache/
 ml/.mypy_cache/
 *.sqlite3
+*.db
+makeup.db
+backend/uploads/
+backend/artifacts/
 *.log
 .DS_Store
