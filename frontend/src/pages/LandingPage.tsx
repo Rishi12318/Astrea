@@ -1,6 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+function useInView(threshold = 0.2) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, visible };
+}
+
 const reviews = [
   { name: 'Priya S.', role: 'Makeup Artist', text: 'ASTREA accurately detected my warm undertone and recommended shades I never would have tried. The AI reasoning is spot-on.', avatar: 'P' },
   { name: 'Ananya M.', role: 'Beauty Blogger', text: 'The face analysis is incredibly precise. It identified my face shape and eye shape perfectly. Game changer for content creators.', avatar: 'A' },
@@ -121,6 +134,58 @@ function PaletteCard() {
   );
 }
 
+function GetStartedSection() {
+  const { ref, visible } = useInView(0.15);
+  const steps = [
+    { num: '01', title: 'Sign Up', desc: 'Create your free account in seconds.' },
+    { num: '02', title: 'Upload Photo', desc: 'Take a selfie or upload any face photo.' },
+    { num: '03', title: 'AI Analysis', desc: 'Get instant face and skin tone analysis.' },
+    { num: '04', title: 'Get Matched', desc: 'Receive personalized product recommendations.' },
+  ];
+
+  return (
+    <section className="px-6 py-24 md:py-32 bg-[#F0EBE3]/50">
+      <div className="mx-auto max-w-5xl" ref={ref}>
+        <div className="text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#550000]/40">How It Works</p>
+          <h2 className="mt-3 font-serif text-3xl tracking-tight text-[#1a1a1a] md:text-5xl">Get Started in 4 Steps</h2>
+        </div>
+
+        <div className="relative mt-20">
+          {/* Connecting line */}
+          <div className="absolute top-6 left-[calc(12.5%+12px)] right-[calc(12.5%+12px)] h-px bg-[#550000]/20 hidden md:block" />
+
+          <div className="grid gap-12 md:grid-cols-4 md:gap-8">
+            {steps.map((s, i) => (
+              <div
+                key={s.num}
+                className="flex flex-col items-center text-center transition-all duration-700"
+                style={{ transitionDelay: `${i * 150}ms`, opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)' }}
+              >
+                {/* Circle */}
+                <div className="relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#550000]/30 bg-white text-sm font-semibold text-[#550000] shadow-sm transition-all duration-500 hover:border-[#550000] hover:bg-[#550000] hover:text-white hover:shadow-md hover:scale-110">
+                  {s.num}
+                </div>
+                <h3 className="mt-5 font-serif text-base font-semibold text-[#1a1a1a]">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#5A4F43]/60">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-14 text-center">
+          <Link
+            to="/auth"
+            className="inline-block rounded-full bg-[#550000] px-10 py-4 text-sm font-semibold text-white shadow-glow transition hover:translate-y-[-2px]"
+          >
+            Get Started Free
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] pt-16">
@@ -173,6 +238,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Get Started ── */}
+      <GetStartedSection />
 
       {/* ── Reviews ── */}
       <section className="px-6 py-24 md:py-32 bg-[#FAF8F5]">
