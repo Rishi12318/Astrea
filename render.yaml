@@ -19,6 +19,8 @@ services:
         value: /app/artifacts
       - key: UPLOAD_DIR
         value: /app/uploads
+      - key: PYTHON_VERSION
+        value: "3.11"
     healthCheckPath: /
     autoDeploy: true
 
