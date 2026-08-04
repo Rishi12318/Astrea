@@ -87,6 +87,57 @@ export default function LandingPage() {
             </p>
           </div>
 
+          {/* Eye Palette Card + Cursive Quote */}
+          <div className="mt-16 flex flex-col items-center gap-10 md:flex-row md:items-center md:justify-center">
+            {/* Eye Palette Card */}
+            <div className="relative w-full max-w-md">
+              <div className="rounded-[2rem] border-2 border-sand-200 bg-gradient-to-br from-[#2C2C2C] to-[#1A1A1A] p-6 shadow-2xl">
+                {/* Palette lid */}
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="font-serif text-sm font-semibold tracking-wider text-white/70">ASTREA</span>
+                  <span className="text-[0.6rem] uppercase tracking-widest text-white/30">Eyeshadow Palette</span>
+                </div>
+                {/* Grid of "pans" with center video pan */}
+                <div className="grid grid-cols-4 grid-rows-3 gap-2.5">
+                  {/* Row 1 */}
+                  <div className="aspect-square rounded-xl bg-gradient-to-br from-rose-300 to-pink-400 shadow-inner" />
+                  <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner" />
+                  <div className="aspect-square rounded-xl bg-gradient-to-br from-fuchsia-300 to-purple-400 shadow-inner" />
+                  <div className="aspect-square rounded-xl bg-gradient-to-br from-red-300 to-rose-500 shadow-inner" />
+                  {/* Row 2: first + center video + last */}
+                  <div className="aspect-square rounded-xl bg-gradient-to-br from-pink-200 to-rose-300 shadow-inner" />
+                  <div className="col-span-2 row-span-2 aspect-square overflow-hidden rounded-2xl border-2 border-white/20 shadow-lg">
+                    <video autoPlay loop muted playsInline className="h-full w-full object-cover">
+                      <source src="https://v1.pinimg.com/videos/iht/expMp4/68/81/5e/68815e08d2c14dfbf89a8f7d18258aaf_720w.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                  <div className="aspect-square rounded-xl bg-gradient-to-br from-red-400 to-pink-500 shadow-inner" />
+                  {/* Row 3: first + last (center covered by row 2 span) */}
+                  <div className="aspect-square rounded-xl bg-gradient-to-br from-orange-300 to-amber-400 shadow-inner" />
+                  <div className="aspect-square rounded-xl bg-gradient-to-br from-rose-400 to-red-400 shadow-inner" />
+                  <div className="aspect-square rounded-xl bg-gradient-to-br from-pink-400 to-fuchsia-400 shadow-inner" />
+                  <div className="aspect-square rounded-xl bg-gradient-to-br from-amber-300 to-orange-400 shadow-inner" />
+                </div>
+                {/* Palette base */}
+                <div className="mt-4 flex items-center justify-center gap-1.5">
+                  <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
+                  <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
+                  <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
+                </div>
+              </div>
+            </div>
+
+            {/* Cursive Italian Text */}
+            <div className="text-center md:text-left md:max-w-sm">
+              <p className="font-serif text-4xl leading-snug italic tracking-wide text-sand-900 md:text-5xl">
+                Questo è il tuo momento di brillare, diva
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-cocoa/55">
+                "This is your time to shine, diva." Let AI find the shades that make you glow.
+              </p>
+            </div>
+          </div>
+
           <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: '🔍', title: 'AI Face Detection', desc: 'CNN-powered analysis using PyTorch and OpenCV for skin tone, undertone, and face shape detection.', tag: 'Computer Vision' },
